@@ -47,3 +47,15 @@ end
 
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+# group :development, :test do
+#   gem 'rspec-rails',        '~> 3.0.0.beta2', github: 'rspec/rspec-rails'
+#   gem 'rspec-core',         '~> 3.0.0.beta2', github: 'rspec/rspec-core'
+#   gem 'rspec-expectations', '~> 3.0.0.beta2', github: 'rspec/rspec-expectations'
+#   gem 'rspec-mocks',        '~> 3.0.0.beta2', github: 'rspec-mocks'
+#   gem 'rspec-support',      '~> 3.0.0.beta2', github: 'rspec/rspec-support'
+# end
+
+group :development, :test do
+  gem 'rspec-rails', '3.0.1'
+end
