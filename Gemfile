@@ -47,3 +47,7 @@ end
 
 gem 'omniauth'
 gem 'omniauth-twitter'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
