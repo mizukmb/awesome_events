@@ -22,6 +22,7 @@ require 'capybara/rspec'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.before(:all, type: :feature) do
+    OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       provider: 'twitter',
       uid: '12345',
