@@ -1,6 +1,6 @@
 == README
 
-![status](https://circleci.com/gh/mizukmb/awesome_events.svg?style=shield&circle-token=df378f865d7623b87299cae752b2de155e6098c7)
+[![CircleCI](https://circleci.com/gh/mizukmb/awesome_events/tree/master.svg?style=shield)](https://circleci.com/gh/mizukmb/awesome_events/tree/master)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
