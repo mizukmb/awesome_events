@@ -27,8 +27,8 @@ RSpec.configure do |config|
       provider: 'twitter',
       uid: '12345',
       info: {
-        nickname: 'netwillnet',
-        image: 'http://example.com/netwillnet.jpg'
+        nickname: 'mizukmb',
+        image: 'http://mizukmb.net'
       }
     })
   end
