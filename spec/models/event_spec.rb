@@ -42,4 +42,30 @@ RSpec.describe Event, type: :model do
       should validate_presence_of(:end_time)
     end
   end
+
+
+  describe 'start_time が end_time' do
+    context 'よりも前にあるとき' do
+      let(:event) { Event.new(start_time: DateTime.new(2000, 4,1), end_time: DateTime.new(2016, 4, 1)) }
+      it 'valid であること' do
+        event.valid?
+        expect(event.errors[:start_time]).to be_blank
+      end
+    end
+    context 'と同じとき' do
+      let(:event) { Event.new(start_time: DateTime.new(2016, 4,1), end_time: DateTime.new(2016, 4, 1)) }
+      it 'valid でないこと' do
+        event.valid?
+        expect(event.errors[:start_time]).to be_present
+      end
+    end
+
+    context 'よりも後にあるとき' do
+      let(:event) { Event.new(start_time: DateTime.new(2016, 4,1), end_time: DateTime.new(2000, 4, 1)) }
+      it 'valid でないこと' do
+        event.valid?
+        expect(event.errors[:start_time]).to be_present
+      end
+    end
+  end
 end
