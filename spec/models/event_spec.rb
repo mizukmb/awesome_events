@@ -45,15 +45,18 @@ RSpec.describe Event, type: :model do
 
 
   describe 'start_time が end_time' do
+    let(:old_time) { DateTime.new(2000, 4, 1) }
+    let(:new_time) { DateTime.new(2016, 4, 1) }
     context 'よりも前にあるとき' do
-      let(:event) { Event.new(start_time: DateTime.new(2000, 4,1), end_time: DateTime.new(2016, 4, 1)) }
+      let(:event) { Event.new(start_time: old_time, end_time: new_time) }
       it 'valid であること' do
         event.valid?
         expect(event.errors[:start_time]).to be_blank
       end
     end
+
     context 'と同じとき' do
-      let(:event) { Event.new(start_time: DateTime.new(2016, 4,1), end_time: DateTime.new(2016, 4, 1)) }
+      let(:event) { Event.new(start_time: new_time, end_time: new_time) }
       it 'valid でないこと' do
         event.valid?
         expect(event.errors[:start_time]).to be_present
@@ -61,7 +64,7 @@ RSpec.describe Event, type: :model do
     end
 
     context 'よりも後にあるとき' do
-      let(:event) { Event.new(start_time: DateTime.new(2016, 4,1), end_time: DateTime.new(2000, 4, 1)) }
+      let(:event) { Event.new(start_time: new_time, end_time: old_time) }
       it 'valid でないこと' do
         event.valid?
         expect(event.errors[:start_time]).to be_present
