@@ -2,20 +2,44 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   describe '#name' do
-    it { should validate_presence_of(:name) }
+    it '空白のとき validation エラーになること' do
+      should validate_presence_of(:name)
+    end
 
-    it { should validate_length_of(:name).is_at_most(50) }
+    it '50文字以下であること' do
+      should validate_length_of(:name).is_at_most(50)
+    end
+  end
 
-    it { should validate_presence_of(:place) }
+  describe '#place' do
+    it '空白のとき validation エラーになること' do
+      should validate_presence_of(:place)
+    end
 
-    it { should validate_length_of(:place).is_at_most(100) }
+    it '100文字以下であること' do
+      should validate_length_of(:place).is_at_most(100)
+    end
+  end
 
-    it { should validate_presence_of(:content) }
+  describe '#content' do
+    it '空白のとき validation エラーになること' do
+      should validate_presence_of(:content)
+    end
 
-    it { should validate_length_of(:content).is_at_most(2000) }
+    it '2000文字以下であること' do
+      should validate_length_of(:content).is_at_most(2000)
+    end
+  end
 
-    it { should validate_presence_of(:start_time) }
+  describe '#start_time' do
+    it '空白のとき validation エラーになること' do
+      should validate_presence_of(:start_time)
+    end
+  end
 
-    it { should validate_presence_of(:end_time) }
+  describe '#end_time' do
+    it '空白のとき validation エラーになること' do
+      should validate_presence_of(:end_time)
+    end
   end
 end
