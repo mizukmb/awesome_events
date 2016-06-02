@@ -61,6 +61,10 @@ RSpec.describe EventsController, type: :controller do
       let(:event) { attributes_for(:event) }
       subject { post :create, event: event }
 
+      it 'ステータスコードとして200を返すこと' do
+        expect(response.status).to eq 200
+      end
+
       it 'DB に新規イベントが格納されている' do
         expect{ subject }.to change(Event, :count).by(1)
       end
