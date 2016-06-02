@@ -10,9 +10,12 @@ RSpec.describe EventsController, type: :controller do
 
 
     context 'ログインしているとき' do
-      it 'ok!が返される' do
+      before do
         session[:user_id] = 'test_user'
         get :index
+      end
+
+      it 'ok!が返される' do
         expect(response.body).to eq "ok!"
       end
     end
