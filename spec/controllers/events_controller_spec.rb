@@ -61,8 +61,9 @@ RSpec.describe EventsController, type: :controller do
       let(:event) { attributes_for(:event) }
       subject { post :create, event: event }
 
-      it 'ステータスコードとして200を返すこと' do
-        expect(response.status).to eq 200
+      it '作成後、イベント詳細ページにリダイレクトする' do
+        subject
+        expect(response).to redirect_to event_path(id: assigns(:event).id)
       end
 
       it 'DB に新規イベントが格納されている' do
