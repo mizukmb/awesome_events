@@ -50,4 +50,37 @@ RSpec.describe EventsController, type: :controller do
       end
     end
   end
+
+  describe 'POST #create' do
+    before do
+      user = create :user
+      session[:user_id] = user.id
+    end
+
+    context 'イベント作成が成功したとき' do
+      let(:event) { attributes_for(:event) }
+      subject { post :create, event: event }
+
+      it 'DB に新規イベントが格納されている' do
+        expect{ subject }.to change(Event, :count).by(1)
+      end
+
+      it 'DB に格納した新規イベント情報がフォームに入力した情報と合っている' do
+        subject
+        expect(assigns(:event).owner_id).to eq session[:user_id]
+        expect(assigns(:event).name).to eq event[:name]
+        expect(assigns(:event).place).to eq event[:place]
+        expect(assigns(:event).start_time).not_to be_nil
+        expect(assigns(:event).end_time).not_to be_nil
+        expect(assigns(:event).content).to eq event[:content]
+      end
+    end
+
+    context 'イベント作成が失敗したとき' do
+      it 'new テンプレートを render していること' do
+        post :create, event: attributes_for(:event, place: nil)
+        expect(response).to render_template :new
+      end
+    end
+  end
 end
