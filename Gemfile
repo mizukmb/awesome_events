@@ -58,3 +58,6 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+group :staging, :production do
+  gem 'unicorn'
+end
