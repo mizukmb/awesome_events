@@ -64,4 +64,7 @@ end
 
 group :development do
   gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-unicorn'
 end
