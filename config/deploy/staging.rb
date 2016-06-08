@@ -61,3 +61,6 @@ role :db, %w{ops@vagrant.local}
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+set :branch, ENV['BRANCH'] if ENV['BRANCH']
+set :rails_env, :staging

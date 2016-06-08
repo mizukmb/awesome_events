@@ -31,11 +31,21 @@ set :scm, :git
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { rbenv_root: '/home/ops/.rbenv', path: '/home/ops/.rbenv/shims:/home/ops/.rbenv/bin:$PATH'  }
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+set :linked_dirs, fetch(:linked_dirs, []).push('tmp/pids')
+
+set :unicorn_rack_env, "none"
+set :unicorn_config_path, 'config/unicorn.rb'
+
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
+  task :restart do
+    invoke 'unicorn:restart'
+  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
