@@ -37,6 +37,7 @@ set :default_env, { rbenv_root: '/home/ops/.rbenv', path: '/home/ops/.rbenv/shim
 set :keep_releases, 5
 
 set :linked_dirs, fetch(:linked_dirs, []).push('tmp/pids')
+set :linked_files, fetch(:linked_files, []).push('.env')
 
 set :unicorn_rack_env, "none"
 set :unicorn_config_path, 'config/unicorn.rb'
