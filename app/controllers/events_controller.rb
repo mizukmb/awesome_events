@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
   before_action :authenticate
 
+  def show
+    begin
+      @event = Event.find(params[:id])
+    rescue => e
+      render text: 'nothing', status: 404
+    end
+  end
+
   def new
     @event = current_user.created_events.build
   end
