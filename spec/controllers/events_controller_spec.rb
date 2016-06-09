@@ -32,6 +32,58 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    let(:event) { create :event }
+
+    context 'ログインしていないとき' do
+      before do
+        get :show, id: event.id
+      end
+
+      it 'show テンプレートを render していること' do
+        expect(response).to render_template :show
+      end
+    end
+
+    context '作成したイベントページに遷移したとき' do
+      before do
+        user  = create :user
+        session[:user_id] = user.id
+        get :show, id: event.id
+      end
+
+      it 'ステータスコードとして200を返すこと' do
+        expect(response.status).to eq 200
+      end
+
+      it 'show テンプレートを render していること' do
+        expect(response).to render_template :show
+      end
+
+      it '@event がイベント情報を持っていること' do
+        expect(assigns[:event]).to eq event
+      end
+    end
+
+    context '作成していないイベントページに遷移したとき' do
+      before do
+        get :show, id: 0
+      end
+
+      it 'ステータスコードとして404を返すこと' do
+        expect(response.status).to eq 404
+      end
+
+      it 'nothingが返される' do
+        expect(response.body).to eq "nothing"
+      end
+
+      it '@event には何も入っていない' do
+        expect(assigns[:event]).to be_nil
+      end
+    end
+  end
+
   describe 'GET #new' do
     context 'ログインユーザがアクセスしたとき' do
       before do
