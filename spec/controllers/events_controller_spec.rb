@@ -40,7 +40,7 @@ RSpec.describe EventsController, type: :controller do
         get :show, id: event.id
       end
 
-      it 'ログインしていなくても show ページを render する' do
+      it 'show テンプレートを render していること' do
         expect(response).to render_template :show
       end
     end
