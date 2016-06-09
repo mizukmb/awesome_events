@@ -33,15 +33,22 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before do
-      user  = create :user
-      session[:user_id] = user.id
-    end
-
     let(:event) { create :event }
+
+    context 'ログインしていないとき' do
+      before do
+        get :show, id: event.id
+      end
+
+      it 'ログインしていなくても show ページを render する' do
+        expect(response).to render_template :show
+      end
+    end
 
     context '作成したイベントページに遷移したとき' do
       before do
+        user  = create :user
+        session[:user_id] = user.id
         get :show, id: event.id
       end
 
